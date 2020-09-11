@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { dbConnection } = require('./database/config');
+const { Schema } = require('mongoose');
 
 //Crear el servidor express
 const app = express();
@@ -18,8 +19,12 @@ app.use(express.json());
 dbConnection();
 
 //Rutas
-app.use('/api/usuarios', require('./routes/usuarios.routes'));
-app.use('/api/login', require('./routes/auth.routes'));
+app.use('/api/usuario', require('./routes/usuario.routes'));
+app.use('/api/hospital', require('./routes/hospital.routes'));
+app.use('/api/medico', require('./routes/medico.routes'));
+app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/todo', require('./routes/busqueda.routes'));
+app.use('/api/upload', require('./routes/upload.routes'));
 
 //Inicia la esucha en el puerto x
 app.listen(process.env.PORT, () => {
